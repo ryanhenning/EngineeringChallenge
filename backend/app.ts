@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 import { getMachineHealth } from './machineHealth';
-import { getUser } from './userService';
+import { getUser } from './user';
 
 const app = express();
 const port = 3001;

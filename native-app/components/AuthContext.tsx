@@ -1,8 +1,9 @@
-import React from "react";
-import { useStorageState } from "../app/useStorageState";
+import React from 'react';
+import { useStorageState } from '../app/useStorageState';
+import { fetchUser } from '../api/userService';
 
 const AuthContext = React.createContext<{
-  signIn: () => void;
+  signIn: (userName?: string) => void;
   signOut: () => void;
   session?: string | null;
   isLoading: boolean;
@@ -16,9 +17,9 @@ const AuthContext = React.createContext<{
 // This hook can be used to access the user info.
 export function useSession() {
   const value = React.useContext(AuthContext);
-  if (process.env.NODE_ENV !== "production") {
+  if (process.env.NODE_ENV !== 'production') {
     if (!value) {
-      throw new Error("useSession must be wrapped in a <SessionProvider />");
+      throw new Error('useSession must be wrapped in a <SessionProvider />');
     }
   }
 
@@ -26,14 +27,14 @@ export function useSession() {
 }
 
 export function SessionProvider(props: React.PropsWithChildren) {
-  const [[isLoading, session], setSession] = useStorageState("session");
+  const [[isLoading, session], setSession] = useStorageState('session');
 
   return (
     <AuthContext.Provider
       value={{
-        signIn: () => {
-          // Perform sign-in logic here
-          setSession("xxx");
+        signIn: async (userName?: string) => {
+          const result = await fetchUser(userName);
+          !!result && setSession(result);
         },
         signOut: () => {
           setSession(null);
