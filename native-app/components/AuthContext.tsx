@@ -35,7 +35,6 @@ export function SessionProvider(props: React.PropsWithChildren) {
         signIn: async (userName?: string) => {
           try {
             const result = await fetchUser(userName);
-            console.log(result);
             !!result && setSession(result);
           } catch (error) {
             throw error;

@@ -13,7 +13,6 @@ export default function StateScreen() {
   const calculateHealth = useCallback(async () => {
     try {
       const result = await fetchMachineHealth(machineData);
-      console.log(result);
 
       if (result?.factory) {
         setScores(result.data);
