@@ -21,9 +21,7 @@ app.post('/machine-health', (req: Request, res: Response) => {
 app.post('/auth/login', (req: Request, res: Response) => {
   const userResult = getUser(req);
 
-  if (!userResult) {
-    res.status(404).json('User not found!');
-  }
+  res.status(200).json({ userName: userResult ?? null });
 });
 
 app.listen(port, () => {

@@ -1,9 +1,10 @@
 import React from 'react';
 import { useStorageState } from '../app/useStorageState';
 import { fetchUser } from '../api/userService';
+import { user } from '../types/user';
 
 const AuthContext = React.createContext<{
-  signIn: (userName?: string) => void;
+  signIn: (userName?: string) => Promise<void>;
   signOut: () => void;
   session?: string | null;
   isLoading: boolean;
@@ -33,8 +34,13 @@ export function SessionProvider(props: React.PropsWithChildren) {
     <AuthContext.Provider
       value={{
         signIn: async (userName?: string) => {
-          const result = await fetchUser(userName);
-          !!result && setSession(result);
+          try {
+            const result = await fetchUser(userName);
+            console.log(result);
+            !!result && setSession(result);
+          } catch (error) {
+            throw error;
+          }
         },
         signOut: () => {
           setSession(null);

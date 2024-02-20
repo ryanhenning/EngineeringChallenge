@@ -127,17 +127,17 @@ export default function EditScreenInfo({ path }: { path: string }) {
         style={styles.input}
         value={partValue}
         onChangeText={(text) => setPartValue(text)}
-        placeholder='Enter part value'
+        placeholder="Enter part value"
       />
 
-      <Button title='Save' onPress={savePart} />
+      <Button title="Save" onPress={savePart} />
 
       {isSaved && <Text style={styles.healthScore}>Saved ✔️</Text>}
     </View>
   );
 }
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   getStartedContainer: {
     alignItems: 'center',
     marginHorizontal: 50,
