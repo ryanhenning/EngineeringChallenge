@@ -3,16 +3,16 @@ import { Button, Platform, StyleSheet, TextInput } from 'react-native';
 
 import { Text, View } from './Themed';
 import { MachineType } from '../types/machine';
-import { useMachineData } from '../app/useMachineData';
 import { useFocusEffect } from 'expo-router';
 import Picker from './Picker';
+import { useMachineData } from './MachineDataContext';
 
 export default function EditScreenInfo({ path }: { path: string }) {
   const [machineName, setMachineName] = useState('');
   const [partName, setPartName] = useState('');
   const [partValue, setPartValue] = useState('');
   const [isSaved, setIsSaved] = useState(false);
-  const { machineData, updateMachineData, loadMachineData } = useMachineData();
+  const { machineData, updateMachineData } = useMachineData();
 
   const machineNames = [
     { label: 'Welding Robot', value: MachineType.WeldingRobot },
@@ -102,13 +102,6 @@ export default function EditScreenInfo({ path }: { path: string }) {
       throw error; // Handle API errors appropriately
     }
   }, [machineData, updateMachineData, machineName, partName, partValue]);
-
-  //Doing this because we're not using central state like redux
-  useFocusEffect(
-    useCallback(() => {
-      loadMachineData();
-    }, [])
-  );
 
   return (
     <View>

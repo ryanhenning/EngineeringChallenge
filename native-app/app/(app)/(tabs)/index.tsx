@@ -1,28 +1,19 @@
-import { Button, Platform, StyleSheet } from 'react-native';
+import { Button, StyleSheet } from 'react-native';
 import { Text, View } from '../../../components/Themed';
-import { Link, useFocusEffect } from 'expo-router';
-import axios from 'axios';
-import { useMachineData } from '../../useMachineData';
+import { Link } from 'expo-router';
 import { useCallback } from 'react';
 import { PartsOfMachine } from '../../../components/PartsOfMachine';
 import { MachineScore } from '../../../components/MachineScore';
-import { apiRoot } from '../../../api/utils';
 import { fetchMachineHealth } from '../../../api/machineService';
+import { useMachineData } from '../../../components/MachineDataContext';
 
 export default function StateScreen() {
-  const { machineData, resetMachineData, loadMachineData, setScores } =
-    useMachineData();
-
-  //Doing this because we're not using central state like redux
-  useFocusEffect(
-    useCallback(() => {
-      loadMachineData();
-    }, [])
-  );
+  const { machineData, resetMachineData, setScores } = useMachineData();
 
   const calculateHealth = useCallback(async () => {
     try {
       const result = await fetchMachineHealth(machineData);
+      console.log(result);
 
       if (result?.factory) {
         setScores(result.data);

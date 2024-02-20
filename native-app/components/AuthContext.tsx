@@ -1,7 +1,6 @@
 import React from 'react';
 import { useStorageState } from '../app/useStorageState';
 import { fetchUser } from '../api/userService';
-import { user } from '../types/user';
 
 const AuthContext = React.createContext<{
   signIn: (userName?: string) => Promise<void>;
@@ -28,7 +27,7 @@ export function useSession() {
 }
 
 export function SessionProvider(props: React.PropsWithChildren) {
-  const [[isLoading, session], setSession] = useStorageState('session');
+  const [[isLoading, session], setSession] = useStorageState<string>('session');
 
   return (
     <AuthContext.Provider
