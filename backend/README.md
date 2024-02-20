@@ -2,6 +2,16 @@
 
 Welcome to the BellSant Machine Health API! This API allows you to evaluate the health of various machines and their components based on provided data. This README provides instructions on how to set up and use the API.
 
+## What's new
+
+I have made an attempt to add a super rudimentary auth check to the backend to allow for the app to hit the backend to verify if the user exists or not.
+
+## What's next
+
+Given more time, I would like to be able to save machine data off to the logged in user, so that the app can support more than one user.
+
+Also, there's no storage at this point; every time the backend starts up, it begins with a clean slate.
+
 ## Prerequisites
 
 Before you get started, make sure you have the following prerequisites installed on your system:

@@ -2,6 +2,18 @@
 
 Welcome to the Machine Health App, a React Native Expo project designed to evaluate the health of various machines in an automobile factory. This README will guide you on setting up and running the app, as well as understanding its structure.
 
+## What's new
+
+- Added a sign in and sign out screen to allow the user to verify who they are before using the app. The sign in button hits the backend to verify the username exists before navigating to the root layout.
+- Persists session data in global state using React's ContextAPI
+- Removes state-based `useMachineData` hook for a full-on `MachineDataContext` provider backed by the ContextAPI
+
+## What's next
+
+Given more time, I would have liked to implement an actual OAuth provider to allow for a secure 3rd party login (Sign in with Google, Github, etc.).
+
+Additionally, I would like to wrap the API calls using a library such as [SWR](https://swr.vercel.app/docs/advanced/react-native) to provide some caching.
+
 ## Getting Started
 
 To get started with the app, follow these steps:
